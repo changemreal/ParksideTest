@@ -121,6 +121,7 @@ $(function () {
 		$("#msg").text(val + " changed");
 	});
 	$(".loan_reg").click(function () {
+		$('#result').html('');
 		$.ajax({
 	 		url: "/mvc/index.php?pkg=parkside&contr=loan&event=register_loan",
 	   		type: "POST",
@@ -130,12 +131,13 @@ $(function () {
 				if(response.status=='Error'){
 					alert(response.message);
 				}else{
-					alert('Loan Application is ' + response.status + '. Loan number is ' + response.loan_id);
+					$('#result').html('Loan Application is ' + response.status + '. Loan number is ' + response.loan_id);
 				}
 	   	   	}
 		});
 	});
 	$(".loan_reg2").click(function () {
+		$('#car_result').html('');
 		$.ajax({
 	 		url: "/mvc/index.php?pkg=parkside&contr=loan&event=check_loan",
 	   		type: "POST",
@@ -143,9 +145,9 @@ $(function () {
 	   		dataType: "JSON",
 	   		success: function(response){
 				if(response.status=='Fail'){
-					alert("We can't locate your loan info.");
+					$('#car_result').html("We can't locate your loan info.");
 				}else{
-					alert('Loan ' + response.data.id + ' application is ' + response.data.status );
+					$('#car_result').html('Loan ' + response.data.id + ' application is ' + response.data.status );
 				}
 	   	   	}
 		});
